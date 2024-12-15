@@ -1,0 +1,189 @@
+﻿@page "/bar-chart"
+
+@inject IChartService chartService
+@inject IJSRuntime jsRuntime
+<h3>Bar Chart</h3>
+
+<figure class="highcharts-figure">
+    <div id="bar-chart"></div>
+</figure>
+
+<h4>Code Example</h4>
+<pre class="prettyprint opacity-load">
+@@page &quot;/bar-chart&quot;
+@@inject IChartService chartService
+@@inject IJSRuntime jsRuntime
+
+&lt;h3>Bar Chart&lt;/h3>
+
+&lt;figure class=&quot;highcharts-figure&quot;>
+&lt;div id=&quot;bar-chart&quot;>&lt;/div>
+&lt;/figure>
+
+@@code {
+
+  
+    private ChartObject BarChart = new ChartObject()
+    {
+        Chart = new Chart()
+        {
+            Type = ChartType.Bar,
+        },
+        Credits = new Credits(false),
+        Title = new Title(&quot;Bar Chart&quot;),
+        Subtitle = new Title(&quot;Summary&quot;),
+        XAxis = new XAxis()
+        {
+            Categories = new List&lt;object>() { &quot;In&quot;, &quot;Out&quot; },
+            Title = new Title(false)
+        },
+        YAxis = new YAxis()
+        {
+            Min = 0,
+            Title = new Title()
+            {
+                Text = &quot;Amount&quot;,
+                Align = Align.High
+            },
+            Labels = new Labels()
+            {
+                Overflow = Overflow.Justify
+            },
+
+        },
+        Tooltip = new Tooltip()
+        { ValuePrefix = &quot;R&quot; },
+        PlotOptions = new PlotOptions()
+        {
+            Bar = new PlotOptionsBar()
+            {
+                DataLabels = new Labels()
+                {
+                    Enabled = true
+                }
+            }
+        },
+        Exporting = new Exporting()
+        {
+            Buttons = new Buttons(false)
+        },
+        Series = new List&lt;SeriesElement>()
+    {
+            new SeriesElement()
+            {
+                Name = &quot;Amount&quot;,
+                Type = ChartType.Bar,
+                ShowInLegend = false,
+                Data = new List&lt;object>
+                {
+                    new Datum()
+                    {
+                        Y = 100000,
+                        Color = &quot;black&quot;
+                    },
+                    new Datum()
+                    {
+                        Y = 50000,
+                        Color = &quot;yellow&quot;
+                    }
+                }
+            }
+        }
+
+
+    };
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        chartService.RenderChart(&quot;bar-chart&quot;, BarChart.Generate());        
+    }
+    };
+
+
+</pre>
+
+
+
+@code {
+
+    private ChartObject BarChart = new ChartObject()
+    {
+        Chart = new Chart()
+        {
+            Type = ChartType.Bar,
+        },
+        Credits = new Credits(false),
+        Title = new Title("Bar Chart"),
+        Subtitle = new Title("Summary"),
+        XAxis = new XAxis()
+        {
+            Categories = new List<object>() { "In", "Out" },
+            Title = new Title(false)
+        },
+        YAxis = new YAxis()
+        {
+            Min = 0,
+            Title = new Title()
+            {
+                Text = "Amount",
+                Align = Align.High
+            },
+            Labels = new Labels()
+            {
+                Overflow = Overflow.Justify
+            },
+
+        },
+        Tooltip = new Tooltip()
+        { ValuePrefix = "R" },
+        PlotOptions = new PlotOptions()
+        {
+            Bar = new PlotOptionsBar()
+            {
+                DataLabels = new Labels()
+                {
+                    Enabled = true
+                }
+            }
+        },
+        Exporting = new Exporting()
+        {
+            Buttons = new Buttons(false)
+        },
+        Series = new List<SeriesElement>()
+    {
+            new SeriesElement()
+            {
+                Name = "Amount",
+                Type = ChartType.Bar,
+                ShowInLegend = false,
+                Data = new List<object?>
+                {
+                    new Datum()
+                    {
+                        Y = 100000,
+                        Color = "black"
+                    },
+                    new Datum()
+                    {
+                        Y = 50000,
+                        Color = "yellow"
+                    }
+                }
+            }
+        }
+
+
+    };
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        chartService.RenderChart("bar-chart", BarChart.Generate());
+        jsRuntime.InvokeVoidAsync("prettyPrint");
+    }
+
+}

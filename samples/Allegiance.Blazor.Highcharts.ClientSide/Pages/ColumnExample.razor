@@ -1,0 +1,155 @@
+﻿@page "/column-chart"
+@inject IChartService chartService
+@inject IJSRuntime jsRuntime
+<h3>Column Chart</h3>
+
+<figure class="highcharts-figure">
+    <div id="columnchart"></div>
+</figure>
+
+
+<h4>Code Example</h4>
+<pre class="prettyprint opacity-load">
+
+@@page &quot;/column-chart&quot;
+@@inject IChartService chartService
+@@inject IJSRuntime jsRuntime
+&lt;h3>Column Chart&lt;/h3>
+
+&lt;figure class=&quot;highcharts-figure&quot;>
+&lt;div id=&quot;columnchart&quot;>&lt;/div>
+&lt;/figure>
+
+@@code {
+  private ChartObject ColumnChart = new ChartObject()
+    {
+        Chart = new Chart(ChartType.Column, false),
+        Title = new Title(&quot;ASCII value of letters in 'COLUMN'&quot;),
+        XAxis = new XAxis(AxisType.Category),
+        YAxis = new YAxis()
+        {
+            Title = new Title(&quot;Letter&quot;),
+        },
+        Legend = new Legend(false),
+        PlotOptions = new PlotOptions()
+        {
+            Column = new PlotOptionsColumn(5),
+            Series = new PlotOptionsSeries()
+            {
+                PointWidth = 60
+            }
+
+        },
+        Series = new List&lt;SeriesElement>()
+        {
+            new SeriesElement()
+            {
+                Name = &quot;ASCII value&quot;,
+                ColorByPoint = true,
+                Data = new List&lt;object>()
+                {
+                    {new Datum(){
+                        Name = &quot;C&quot;, 
+                        Y = 67
+                    }},
+                    {new Datum(){
+                        Name = &quot;O&quot;, 
+                        Y = 79
+                    }},
+                    {new Datum(){
+                        Name = &quot;L&quot;, 
+                        Y = 76
+                    }},
+                    {new Datum(){
+                        Name = &quot;U&quot;, 
+                        Y = 85
+                    }},
+                    {new Datum(){
+                        Name = &quot;M&quot;, 
+                        Y = 77
+                    }},
+                    {new Datum(){
+                        Name = &quot;N&quot;, 
+                        Y = 78
+                    }}
+                }
+            }
+        }
+    };
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        chartService.RenderChart(&quot;columnchart&quot;, ColumnChart.Generate());        
+    }
+}
+
+</pre>
+
+
+@code {
+    private ChartObject ColumnChart = new ChartObject()
+    {
+        Chart = new Chart(ChartType.Column, false),
+        Title = new Title("ASCII value of letters in 'COLUMN'"),
+        XAxis = new XAxis(AxisType.Category),
+        YAxis = new YAxis()
+        {
+            Title = new Title("Letter"),
+        },
+        Legend = new Legend(false),
+        PlotOptions = new PlotOptions()
+        {
+            Column = new PlotOptionsColumn(5),
+            Series = new PlotOptionsSeries()
+            {
+                PointWidth = 60
+            }
+
+        },
+        Series = new List<SeriesElement>()
+        {
+            new SeriesElement()
+            {
+                Name = "ASCII value",
+                ColorByPoint = true,
+                Data = new List<object?>()
+                {
+                    {new Datum(){
+                        Name = "C", 
+                        Y = 67
+                    }},
+                    {new Datum(){
+                        Name = "O", 
+                        Y = 79
+                    }},
+                    {new Datum(){
+                        Name = "L", 
+                        Y = 76
+                    }},
+                    {new Datum(){
+                        Name = "U", 
+                        Y = 85
+                    }},
+                    {new Datum(){
+                        Name = "M", 
+                        Y = 77
+                    }},
+                    {new Datum(){
+                        Name = "N", 
+                        Y = 78
+                    }}
+                }
+            }
+        }
+    };
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        chartService.RenderChart("columnchart", ColumnChart.Generate());
+        jsRuntime.InvokeVoidAsync("prettyPrint");
+    }
+
+
+}
