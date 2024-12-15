@@ -12,3 +12,4 @@ builder.Services.AddTransient<IChartService, ChartService>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();
+// i am adding this
