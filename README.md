@@ -3,16 +3,16 @@ Blazor Wrapper for Highcharts library
 
 ### Quick Installation Guide
 
-Install Package.
+Packages which are used detail below.
 
-Add the following to `_Imports.razor`
+For Charts created Library and included the following to `_Imports.razor`
 ```razor
 @using Allegiance.Blazor.Highcharts.Charts;
 @using Allegiance.Blazor.Highcharts.Options;
 @using Allegiance.Blazor.Highcharts.Constants;
 @using Allegiance.Blazor.Highcharts.Services;
 ```
-Add the following to `index.html`
+For Chart Js Libraries the following to `index.html`
 ```razor
     <script src="_content/Allegiance.Blazor.Highcharts/scripts/blazor-highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -26,7 +26,7 @@ Add the following to `index.html`
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 ```
-Add the following to the relevant sections of `Program.cs`
+Added the following to the relevant sections of `Program.cs`
 ```c#
 using Allegiance.Blazor.Highcharts.Services;
 ```
